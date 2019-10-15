@@ -1,0 +1,9 @@
+NªSocio		Nombre		NªMotos		Importe		Motos
+   0		Luis		0		0		Ninguna
+   1		Paco		1		1200		Guzzi
+   2		Lucia		1		2500		Vespa
+   3		Alex		1		3800		Bultaco
+   4		Maria		1		1200		Guzzi
+   5		Gaspar		1		4000		Ducati
+   6		Jose		1		2500		Vespa
+   7		juas		2		5500		motorola Vespa

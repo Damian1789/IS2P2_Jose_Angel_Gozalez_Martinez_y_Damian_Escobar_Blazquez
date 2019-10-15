@@ -1,0 +1,8 @@
+4 cede a 1 la moto Vespa de precio 2500 con fecha 27/04/01
+1 cede a 2 la moto Motobenae de precio 2300 con fecha 10/02/14
+2 cede a 4 la moto Vespa de precio 2500 con fecha 15/06/98
+0 cede a 5 la moto Vespa de precio 2500 con fecha 16/01/97
+2 cede a 4 la moto Libre de precio 1000 con fecha 14/11/01
+6 cede a 1 la moto Guzzi de precio 1200 con fecha 15/02/97
+1 cede a 6 la moto Guzzi de precio 1200 con fecha 10/14/12
+6 cede a 1 la moto Guzzi de precio 1200 con fecha 24/05/07

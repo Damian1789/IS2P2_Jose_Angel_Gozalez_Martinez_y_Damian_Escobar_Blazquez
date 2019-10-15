@@ -1,0 +1,1 @@
+Para el correcto funcionamiento del programa introducir la carpeta archivos en C:\Archivos o donde sea el disco duro

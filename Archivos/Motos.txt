@@ -1,0 +1,11 @@
+Nombre	Caballos	precio
+Vespa	125	2500
+Vespa	125	2500
+Motobenae	70	2300
+Bultaco	200	3800
+Guzzi	75	1200
+Ducati	49	4000
+bi	98	2000
+motorola	100	3000
+Libre	90	1000
+hyperion	85	1000
