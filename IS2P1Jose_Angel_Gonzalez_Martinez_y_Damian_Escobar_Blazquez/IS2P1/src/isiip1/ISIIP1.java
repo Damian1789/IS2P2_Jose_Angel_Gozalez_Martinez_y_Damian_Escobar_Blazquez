@@ -57,8 +57,10 @@ public class ISIIP1 {
 		boolean f=true;
 		Scanner escribir = new Scanner(System.in);
 		
+                System.out.println("Eliga el precio maximo que puede tener un cliente");
+		Metodos l = new Metodos(escribir.nextInt());
+                
 		while(f) {
-			Metodos l = new Metodos();
 			System.out.println("Eliga el valor asociado a lo que quiere hacer. ");
 			System.out.println("1. Registrar un nuevo miembro.");
 			System.out.println("2. Registrar una nueva motocicleta. ");

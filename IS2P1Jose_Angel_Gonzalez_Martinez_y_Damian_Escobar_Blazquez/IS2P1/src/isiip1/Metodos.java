@@ -34,7 +34,10 @@ public class Metodos {
 	BufferedWriter lineafileW;
 	Scanner x = new Scanner(System.in);
 	StringTokenizer token;
-	public Metodos() throws IOException {
+	int precioMAX;
+	
+	public Metodos(int p) throws IOException {
+		precioMAX=p;
 	}
 	
 	public void registrarMiembro(String directorio) throws IOException {
@@ -110,7 +113,7 @@ public class Metodos {
 			if(token.nextToken().equals(codigoU)) {                         // cuando encuentra al usuario con el que queremos asociar la moto, entonces entra
 				token.nextToken();
 				token.nextToken();
-				if((Integer.parseInt(token.nextToken())+precio)<6000) { // comprobamos que no se pasa de 6000 euros al adquiror la moto
+				if((Integer.parseInt(token.nextToken())+precio)<precioMAX) { // comprobamos que no se pasa de 6000 euros al adquiror la moto
 					return true;                                    // si no se pasa devuelve true
 				}
 			}
