@@ -56,7 +56,7 @@ public class ISIIP1 {
 		int x;
 		boolean f=true;
 		Scanner escribir = new Scanner(System.in);
-		
+		//cambio parte 1
                 System.out.println("Eliga el precio maximo que puede tener un cliente");
 		Metodos l = new Metodos(escribir.nextInt());
                 
