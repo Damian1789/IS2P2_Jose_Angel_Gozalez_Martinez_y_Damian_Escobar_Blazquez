@@ -17,9 +17,7 @@ package isiip1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -195,7 +193,7 @@ public class Metodos {
 			token =new StringTokenizer(linea);
 			token.nextToken();
 			token.nextToken();
-			if(!token.nextToken().equals("0")) {            // PREGUNTAR A JA si tiene más de 0 motos
+			if(!token.nextToken().equals("0")) {
 				System.out.println(linea);              // imprime la línea entera
 			}
 		}
@@ -234,7 +232,6 @@ public class Metodos {
         public void registraCesion(String directorioU, String directorioM, String directorioC) throws IOException {
                 String codigoU1, codigoU2, nombreM;
                 int precio;
-                String linea;
                 //comprobamos que el usuario que cede existe
                 //comprobamos que el usuario al que cedemos existe
                 //comprobamos que la moto existe
@@ -249,11 +246,11 @@ public class Metodos {
                         System.out.println("Introduzca el codigo del usuario al que recibe la cesion");// pedimos un usuario por linea de comandos
                         codigoU2 = x.nextLine();                                            // lo guardamos en codigoU2
                         if (compruebaUsuario(codigoU2, directorioU)){                       //comprobamos que exite el usuario
-                            System.out.println("Introduzca de el nombre de la moto a ceder ");
+                            System.out.println("Introduzca el nombre de la moto a ceder ");
                             nombreM = x.nextLine();
                             if (compruebaMoto(nombreM, codigoU1, directorioU)){             // comprobamos que el usuario que cesa tiene esa moto
                                 precio = obtenPrecio(nombreM, directorioM);                 // sacamos el precio de la moto
-                                if (comprobacion(directorioU, precio, codigoU2)){           // comprobamos que el usuario 2 no excederá de 6000 al recibir la moto                                                                                  
+                                if (comprobacion(directorioU, precio, codigoU2)){           // comprobamos que el usuario 2 no excederá de precioMAX al recibir la moto                                                                                  
                                                                             
                                     fileW = new FileWriter(directorioC, true);
                                     lineafileW = new BufferedWriter(fileW);                                
@@ -280,7 +277,7 @@ public class Metodos {
                                     anyadeMoto(directorioU, codigoU2, nombreM, directorioM);
                                 }
                                 else
-                                    System.out.println("El miembro que recibira la cesion no puede hacerlo debido a que excedera la cifra de 6000 euros en motos");
+                                    System.out.println("El miembro que recibira la cesion no puede hacerlo debido a que excedera la cifra de 6 "+precioMAX+" euros en motos");
                             
                             }
                             else
@@ -294,16 +291,66 @@ public class Metodos {
                 }
                 else
                     System.out.println("No existe el miembro");
-                
-                
         }
+        
+        public void registraCesion(String directorioU, String directorioM, String directorioC, String codigoU1, String moto) throws IOException {
+                String codigoU2;
+                int precio;
+                //comprobamos que el usuario al que cedemos existe
+                //comprobamos que la moto existe
+                // comprobamso que el que cede tiene al menos una moto
+                // si tras la cesion se queda sin moto hay que poner ninguna
+                if (tieneAlgo(codigoU1, directorioU)){                                   // comprobamos si tiene alguna moto
+                    System.out.println("Introduzca el codigo del usuario al que recibe "); // pedimos un usuario por linea de comandos
+                    System.out.println("la moto "+moto+" en la cesion");
+                    codigoU2 = x.next();                                                 // lo guardamos en codigoU2
+                    if (compruebaUsuario(codigoU2, directorioU) && !codigoU1.equals(codigoU2)){                        //comprobamos que exite el usuario
+                        precio = obtenPrecio(moto, directorioM);                         // sacamos el precio de la moto
+                        if (comprobacion(directorioU, precio, codigoU2)){                // comprobamos que el usuario 2 no excederá precioMAX al recibir la moto                                                                                  
+                                                                            
+                            fileW = new FileWriter(directorioC, true);
+                            lineafileW = new BufferedWriter(fileW);                                
+                            fileW.write("\n");
+                            fileW.write(codigoU1);                                          // escribimos el nombre del que cede
+                            fileW.write(" cede a ");
+                            fileW.write(codigoU2);
+                            fileW.write(" la moto ");
+                            fileW.write(moto);
+                            fileW.write(" de precio ");
+                            fileW.write(Integer.toString(precio));
+                            fileW.write(" con fecha");
+                            System.out.println("Escriba la fecha de hoy:");
+                            fileW.write(" ");
+                            fileW.write(x.next());
+                                    
+                            lineafileW.close();                                             // lo cerramos por si las moscas                                                                        
+                            fileW.close();	
+                                    
+                            System.out.println("Cesion realizada con exito");
+                                    
+                                    
+                            eliminaMoto(directorioU, codigoU1, moto, directorioM);
+                            anyadeMoto(directorioU, codigoU2, moto, directorioM);
+                        }else{
+                            System.out.println("El miembro que recibira la cesion no puede hacerlo debido a que excedera la cifra de "+precioMAX+" euros en motos");
+                            registraCesion(directorioU, directorioM, directorioC, codigoU1, moto);
+                            }
+                    }else{
+                        System.out.println("No existe el miembro a ceder la moto");
+                        registraCesion(directorioU, directorioM, directorioC, codigoU1, moto);
+                    }
+                }else{
+                    System.out.println("el miembro no tiene motos");
+                }
+        }
+        
         public boolean compruebaUsuario(String codigoU, String directorioU) throws IOException{
                 fileR = new FileReader(directorioU);
 		lineafileR = new BufferedReader(fileR);    
                 String linea;
 		lineafileR.readLine();
 		while((linea=lineafileR.readLine()) != null) {                          // va linea a linea
-			token =new StringTokenizer(linea);
+			token = new StringTokenizer(linea);
 			if(token.nextToken().equals(codigoU)) {                         // si encuentra al usuario es que existe
                             return true;                                                // y devolvemos true
                         }
@@ -322,9 +369,7 @@ public class Metodos {
                             token.nextToken();
                             if(!token.nextToken().equals(cero)){                // si tiene alguna moto para cesar
                                 return true;                                    // devolvemos true
-                            }
-                            
-                                                                           
+                            }                                               
                         }
                 }
             return false;                                                       // si no tiene motos devolvemos false
@@ -464,7 +509,7 @@ public class Metodos {
                 fileW.close();
         }
         
-        public void anyadeMoto(String directorioU, String codigoU2, String nombreM, String directorioM) throws FileNotFoundException, IOException{ //añadeMoto
+        public void anyadeMoto(String directorioU, String codigoU, String nombreM, String directorioM) throws FileNotFoundException, IOException{ //añadeMoto
                 String linea, aux;
                 String vacio = "";                        
                 int precio;                                                     // aquí irá el precio final de la resta
@@ -480,7 +525,7 @@ public class Metodos {
                 	token =new StringTokenizer(linea);
                         linea=vacio;
                         aux = token.nextToken();
-                        if(aux.equals(codigoU2)) {                        // una vez encontramos al usuario 
+                        if(aux.equals(codigoU)) {                        // una vez encontramos al usuario 
                             linea=vacio;                                  // limpiamos la linea para poder reescribirla
                             linea = linea + "   ";                        // un espacio para cuadrar las lineas
                             linea = linea + aux;                          // lo guardamos en linea
@@ -635,5 +680,76 @@ public class Metodos {
             return false;                                           // si no la encontramso devolvemos false
         }
         
+        public void eliminarUsuario(String directorioU, String directorioM, String directorioC) throws IOException{
+            String id;
+            System.out.println("introduzca el id del usuario que quieres borrar");
+            id=x.next();
+            
+            if(compruebaUsuario(id, directorioU)){                             //comprobamos si el usuario existe
+             transferirMotos(directorioU,directorioM, directorioC, id);        //si funciona correctamente se acaba borrando al usuario
+             System.out.println("3");
+             eliminarEnSocios(directorioU,id);                                 //elimina al socio
+            }else{
+                eliminarUsuario(directorioU, directorioM, directorioC);
+            }
+        }
+        
+        public void transferirMotos(String directorioU, String directorioM, String directorioC, String idU) throws FileNotFoundException, IOException{
+            fileR = new FileReader(directorioU);
+            lineafileR = new BufferedReader(fileR);
+            ArrayList<String> aux = new ArrayList<String>();
+            String linea;
+            
+            while((linea=lineafileR.readLine())!=null){
+                token = new StringTokenizer(linea);
+                if(token.nextToken().equals(idU)){
+                    token.nextToken();token.nextToken();token.nextToken();                  //token hasta llegar a motos
+                    while(token.hasMoreElements()){
+                        aux.add(token.nextToken());
+                    }
+                    while(!aux.isEmpty()){
+                        registraCesion(directorioU, directorioM, directorioC, idU, aux.get(0));
+                        aux.remove(0);
+                    }
+                    break;
+                }
+            }
+        }
+        
+        public void eliminarEnSocios(String d, String id) throws FileNotFoundException, IOException{
+            String linea;
+            fileR = new FileReader(d);
+            lineafileR = new BufferedReader(fileR);
+            ArrayList copia = new ArrayList();
+            boolean aux=false;
+            
+            while((linea=lineafileR.readLine())!=null){
+                token = new StringTokenizer(linea);
+                if(!token.nextToken().equals(id)){              //añade cada linea de texto excepto
+                    copia.add(linea);                           //la del usuario a borrar
+                }                                               //que la salta
+            }
+            
+            lineafileR.close();                                   
+            fileR.close();
+                
+            fileW = new FileWriter(d);
+            lineafileW = new BufferedWriter(fileW);
+                
+            while(copia.size()!=0) {
+                if(aux){
+                    fileW.write("\n");
+                }else{
+                    aux=true;
+                }
+              	fileW.write((String) copia.get(0));
+               	copia.remove(0);
+                }
+                
+            lineafileW.close();
+            fileW.close();
+            
+            System.out.println("el usuario fue borrado con exito");
+        }
 }
 
