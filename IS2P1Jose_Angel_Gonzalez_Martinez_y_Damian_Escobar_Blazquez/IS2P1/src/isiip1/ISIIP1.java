@@ -68,7 +68,8 @@ public class ISIIP1 {
 			System.out.println("4. Listar en pantalla los miembros con motos en posesión  ");
 			System.out.println("5. Listar todas las motos ");
 			System.out.println("6. Mostrar las cesiones realizadas ");
-			System.out.println("7. Salir del programa. ");
+                        System.out.println("7. Anyadir importe a una moto ");
+			System.out.println("8. Salir del programa. ");
 			x = escribir.nextInt();
 			switch(x) {
 				case 1:
@@ -98,8 +99,12 @@ public class ISIIP1 {
 				case 6:
 					l.muestraCesiones("C:/Archivos/Cesiones.txt");
 					break;
+                                        
+                                case 7:
+					l.anyadeImporte("C:/Archivos/Motos.txt");
+					break;
 					
-				case 7:
+				case 8:
 					System.out.println("Gracias y adios");	
 					f=false;
 					break;

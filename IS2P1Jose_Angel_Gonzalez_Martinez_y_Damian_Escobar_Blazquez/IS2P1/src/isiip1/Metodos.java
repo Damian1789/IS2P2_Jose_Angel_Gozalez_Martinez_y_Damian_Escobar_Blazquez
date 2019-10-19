@@ -132,7 +132,9 @@ public class Metodos {
 		fileW.write(x.next());                                  // se insertan por teclado los caballos de la moto
 		fileW.write("	");
 		fileW.write(Integer.toString(precio));                  // se escribe el precio de la moto
-		
+		System.out.println("Escriba los costes de mantenimiento de la moto:"); 
+		fileW.write("	");
+		fileW.write(x.next());                                  // se insertan por teclado los costes de mantenimiento de la moto
 		lineafileW.close();                                     // los cerramos por si acaso
 		fileW.close();
 	}
@@ -543,6 +545,94 @@ public class Metodos {
                 
                 lineafileW.close();
                 fileW.close();
+        }
+        
+        /**
+     *
+     * @param directorioM
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void anyadeImporte(String directorioM) throws FileNotFoundException, IOException{                    
+                String linea, nombreM, aux;
+                String vacio = "";
+                int importe, precio;
+                ArrayList<String> copia = new ArrayList<String>();		
+                System.out.println("Dime el nombre de la moto a la que anyadir el importe");
+                nombreM = x.next();                
+                if(existeMoto(directorioM, nombreM)){
+                    System.out.println("Dime el importe a anyadir");
+                    importe = x.nextInt();
+                    fileR = new FileReader(directorioM);
+                    lineafileR = new BufferedReader(fileR);
+                    lineafileR.readLine();
+                    while((linea=lineafileR.readLine()) != null) {      // va linea a linea
+                        token =new StringTokenizer(linea);
+                        aux =token.nextToken(); 
+                        if(aux.equals(nombreM)){                        // si encontramos la moto
+                            linea = vacio;
+                            linea = linea + aux;                        // almacenamos el nombre de la moto
+                            linea = linea + "           " + token.nextToken();  // almacenamos los caballos de la moto
+                            linea = linea + "		" + token.nextToken();  // almacenamos el precio de la moto
+                            precio = importe + Integer.parseInt(token.nextToken());
+                            linea = linea + "		" + precio;             // alamcenamos el coste del mantenimiento de la moto
+                        
+                        }
+                        else{
+                            linea = vacio;
+                            linea = linea + aux;                        // almacenamos el nombre de la moto
+                            linea = linea + "           " + token.nextToken();  // almacenamos los caballos de la moto
+                            linea = linea + "		" + token.nextToken();  // almacenamos el precio de la moto
+                            linea = linea + "		" + token.nextToken();  // alamcenamos el coste del mantenimiento de la moto                           
+                        }
+                        copia.add(linea);
+                        copia.add("\n");  
+                        linea=vacio;    
+                    }
+                    lineafileR.close();                                     // cerramos por si acaso                                
+                    fileR.close();
+                    
+                    fileW = new FileWriter(directorioM);
+                    lineafileW = new BufferedWriter(fileW);
+		                    
+                    fileW.write("Nombre		Caballos	precio		Mantenimiento");
+                    fileW.write("\n");
+                
+                    while(copia.size()!=1) {
+                	fileW.write(copia.get(0));
+                	copia.remove(0);
+                    }
+                    
+                    lineafileW.close();
+                    fileW.close();
+                }
+                else
+                    System.out.println("No existe la moto mencionada, lo lamento");
+        }
+        
+    /**
+     *
+     * @param directorioM
+     * @param nombreM
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public boolean existeMoto(String directorioM, String nombreM)throws FileNotFoundException, IOException{
+            fileR = new FileReader(directorioM);
+            lineafileR = new BufferedReader(fileR);String linea;
+            lineafileR.readLine();
+            while((linea=lineafileR.readLine()) != null) {          // va linea a linea
+		token =new StringTokenizer(linea);
+		if(token.nextToken().equals(nombreM)) {             // si encontramos la moto
+                    lineafileR.close();                             // cerramos por si acaso                                
+                    fileR.close();
+                    return true;                                    // devolvemos true
+                } 
+            }
+            lineafileR.close();                                     // cerramos por si acaso                                
+            fileR.close();
+            return false;                                           // si no la encontramso devolvemos false
         }
         
 }
