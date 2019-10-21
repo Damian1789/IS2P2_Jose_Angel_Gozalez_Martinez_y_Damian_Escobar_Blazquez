@@ -48,9 +48,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Damian
+ */
 public class ISIIP1 {
 
-	public static void main(String[] args) throws IOException {
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
 		System.out.println("Bienvenido.");
 		
 		int x;
@@ -70,7 +79,7 @@ public class ISIIP1 {
 			System.out.println("6. Mostrar las cesiones realizadas ");
                         System.out.println("7. Anyadir importe a una moto ");
                         System.out.println("8. Eliminar miembro");
-                        
+                        System.out.println("9. Lista miembros con mas cesiones ");
 			System.out.println("10. Salir del programa. ");
 			x = escribir.nextInt();
 			switch(x) {
@@ -110,6 +119,9 @@ public class ISIIP1 {
                                                 "C:/Archivos/Motos.txt",
                                                 "C:/Archivos/Cesiones.txt");
                                         break;
+                                case 9:
+					l.miembroConMasCesionesRecibidas("C:/Archivos/Cesiones.txt");
+					break;
 					
 				case 10:
 					System.out.println("Gracias y adios");	

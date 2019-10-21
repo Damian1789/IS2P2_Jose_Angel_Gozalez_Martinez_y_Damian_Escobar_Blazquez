@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ *
+ * @author Damian
+ */
 public class Metodos {
 	FileReader fileR;
 	FileWriter fileW;
@@ -34,11 +38,21 @@ public class Metodos {
 	StringTokenizer token;
 	int precioMAX;
 	
-	public Metodos(int p) throws IOException {
+    /**
+     *
+     * @param p
+     * @throws IOException
+     */
+    public Metodos(int p) throws IOException {
 		precioMAX=p;
 	}
 	
-	public void registrarMiembro(String directorio) throws IOException {
+    /**
+     *
+     * @param directorio
+     * @throws IOException
+     */
+    public void registrarMiembro(String directorio) throws IOException {
 		fileR = new FileReader(directorio);
 		lineafileR = new BufferedReader(fileR);
 		fileW = new FileWriter(directorio,true);
@@ -69,7 +83,13 @@ public class Metodos {
 		fileW.close();
 	}
 	
-	public void registrarMoto(String directorioM, String directorioU) throws IOException {
+    /**
+     *
+     * @param directorioM
+     * @param directorioU
+     * @throws IOException
+     */
+    public void registrarMoto(String directorioM, String directorioU) throws IOException {
 		fileR = new FileReader(directorioU);
 		lineafileR = new BufferedReader(fileR);
 		
@@ -101,7 +121,15 @@ public class Metodos {
 		}
 	}
 	
-	public boolean comprobacion(String directorio, int precio,String codigoU) throws IOException { // comprueba si el precio de la moto es correcto
+    /**
+     *
+     * @param directorio
+     * @param precio
+     * @param codigoU
+     * @return
+     * @throws IOException
+     */
+    public boolean comprobacion(String directorio, int precio,String codigoU) throws IOException { // comprueba si el precio de la moto es correcto
 		fileR = new FileReader(directorio);
 		lineafileR = new BufferedReader(fileR);
 		String linea;
@@ -119,7 +147,14 @@ public class Metodos {
 		return false;                                                           // en cualuier otro caso devuelve false
 	}
 	
-	public void introducirMoto(String directorio, int precio, String nombre) throws IOException { // este método inserta una moto en el directorio, con todos los datos de la moto
+    /**
+     *
+     * @param directorio
+     * @param precio
+     * @param nombre
+     * @throws IOException
+     */
+    public void introducirMoto(String directorio, int precio, String nombre) throws IOException { // este método inserta una moto en el directorio, con todos los datos de la moto
 		fileW = new FileWriter(directorio,true);
 		lineafileW = new BufferedWriter(fileW);
 		
@@ -137,7 +172,15 @@ public class Metodos {
 		fileW.close();
 	}
 	
-	public void relacionarMotoUsuario(int precio, String directorio, String nombreM, String codigoU) throws IOException { // PREGUNTAR A JA
+    /**
+     *
+     * @param precio
+     * @param directorio
+     * @param nombreM
+     * @param codigoU
+     * @throws IOException
+     */
+    public void relacionarMotoUsuario(int precio, String directorio, String nombreM, String codigoU) throws IOException { // PREGUNTAR A JA
 		fileR = new FileReader(directorio);
 		lineafileR = new BufferedReader(fileR);
 		
@@ -183,7 +226,12 @@ public class Metodos {
 		fileW.close();
 	}
 	
-	public void leerTodo(String directorio) throws IOException {    // lee todas las líneas del archivo
+    /**
+     *
+     * @param directorio
+     * @throws IOException
+     */
+    public void leerTodo(String directorio) throws IOException {    // lee todas las líneas del archivo
 		
 		String linea;
 		fileR = new FileReader(directorio);
@@ -201,7 +249,12 @@ public class Metodos {
 		fileR.close();
 	}
 	
-	public void leerMotosyDuenyo(String directorio) throws IOException {
+    /**
+     *
+     * @param directorio
+     * @throws IOException
+     */
+    public void leerMotosyDuenyo(String directorio) throws IOException {
 		
 		String linea,duenyo;
 		fileR = new FileReader(directorio);
@@ -229,7 +282,15 @@ public class Metodos {
 		lineafileR.close();                                     // cerramos por si acaso
 		fileR.close();
 	}
-        public void registraCesion(String directorioU, String directorioM, String directorioC) throws IOException {
+
+    /**
+     *
+     * @param directorioU
+     * @param directorioM
+     * @param directorioC
+     * @throws IOException
+     */
+    public void registraCesion(String directorioU, String directorioM, String directorioC) throws IOException {
                 String codigoU1, codigoU2, nombreM;
                 int precio;
                 //comprobamos que el usuario que cede existe
@@ -293,7 +354,16 @@ public class Metodos {
                     System.out.println("No existe el miembro");
         }
         
-        public void registraCesion(String directorioU, String directorioM, String directorioC, String codigoU1, String moto) throws IOException {
+    /**
+     *
+     * @param directorioU
+     * @param directorioM
+     * @param directorioC
+     * @param codigoU1
+     * @param moto
+     * @throws IOException
+     */
+    public void registraCesion(String directorioU, String directorioM, String directorioC, String codigoU1, String moto) throws IOException {
                 String codigoU2;
                 int precio;
                 //comprobamos que el usuario al que cedemos existe
@@ -344,7 +414,14 @@ public class Metodos {
                 }
         }
         
-        public boolean compruebaUsuario(String codigoU, String directorioU) throws IOException{
+    /**
+     *
+     * @param codigoU
+     * @param directorioU
+     * @return
+     * @throws IOException
+     */
+    public boolean compruebaUsuario(String codigoU, String directorioU) throws IOException{
                 fileR = new FileReader(directorioU);
 		lineafileR = new BufferedReader(fileR);    
                 String linea;
@@ -357,7 +434,15 @@ public class Metodos {
                 }
                 return false;                                                           // si no encuentra el codigo de ese usuario es que no existe o no está registrado, por lo que devolvemos false
         }
-        public boolean tieneAlgo(String codigoU, String directorioU) throws IOException{
+
+    /**
+     *
+     * @param codigoU
+     * @param directorioU
+     * @return
+     * @throws IOException
+     */
+    public boolean tieneAlgo(String codigoU, String directorioU) throws IOException{
                 fileR = new FileReader(directorioU);
 		lineafileR = new BufferedReader(fileR);    
                 String linea;
@@ -374,7 +459,16 @@ public class Metodos {
                 }
             return false;                                                       // si no tiene motos devolvemos false
         }
-        public boolean compruebaMoto(String codigoM, String codigoU1, String directorioU) throws IOException{
+
+    /**
+     *
+     * @param codigoM
+     * @param codigoU1
+     * @param directorioU
+     * @return
+     * @throws IOException
+     */
+    public boolean compruebaMoto(String codigoM, String codigoU1, String directorioU) throws IOException{
             
                 fileR = new FileReader(directorioU);
 		lineafileR = new BufferedReader(fileR);    
@@ -402,8 +496,14 @@ public class Metodos {
             return false;        // si no encuentra el codigo de ese usuario es que no existe o no está registrado, por lo que devolvemos false
         }
         
-        
-        public int obtenPrecio(String codigoM, String directorioM) throws IOException{
+    /**
+     *
+     * @param codigoM
+     * @param directorioM
+     * @return
+     * @throws IOException
+     */
+    public int obtenPrecio(String codigoM, String directorioM) throws IOException{
             
                 fileR = new FileReader(directorioM);
 		lineafileR = new BufferedReader(fileR);    
@@ -420,8 +520,12 @@ public class Metodos {
             
         }
         
-        
-        public void muestraCesiones(String directorioC) throws IOException{
+    /**
+     *
+     * @param directorioC
+     * @throws IOException
+     */
+    public void muestraCesiones(String directorioC) throws IOException{
             String linea;
 		fileR = new FileReader(directorioC);
 		lineafileR = new BufferedReader(fileR);
@@ -436,7 +540,16 @@ public class Metodos {
 		
         }
         
-        public void eliminaMoto(String directorioU, String codigoU1, String nombreM, String directorioM) throws FileNotFoundException, IOException{
+    /**
+     *
+     * @param directorioU
+     * @param codigoU1
+     * @param nombreM
+     * @param directorioM
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void eliminaMoto(String directorioU, String codigoU1, String nombreM, String directorioM) throws FileNotFoundException, IOException{
                 String linea, aux;
                 String vacio = "";                        
                 int precio;                                                     // aquí irá el precio final de la resta
@@ -509,7 +622,16 @@ public class Metodos {
                 fileW.close();
         }
         
-        public void anyadeMoto(String directorioU, String codigoU, String nombreM, String directorioM) throws FileNotFoundException, IOException{ //añadeMoto
+    /**
+     *
+     * @param directorioU
+     * @param codigoU
+     * @param nombreM
+     * @param directorioM
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void anyadeMoto(String directorioU, String codigoU, String nombreM, String directorioM) throws FileNotFoundException, IOException{ //añadeMoto
                 String linea, aux;
                 String vacio = "";                        
                 int precio;                                                     // aquí irá el precio final de la resta
@@ -680,7 +802,14 @@ public class Metodos {
             return false;                                           // si no la encontramso devolvemos false
         }
         
-        public void eliminarUsuario(String directorioU, String directorioM, String directorioC) throws IOException{
+    /**
+     *
+     * @param directorioU
+     * @param directorioM
+     * @param directorioC
+     * @throws IOException
+     */
+    public void eliminarUsuario(String directorioU, String directorioM, String directorioC) throws IOException{
             String id;
             System.out.println("introduzca el id del usuario que quieres borrar");
             id=x.next();
@@ -694,7 +823,16 @@ public class Metodos {
             }
         }
         
-        public void transferirMotos(String directorioU, String directorioM, String directorioC, String idU) throws FileNotFoundException, IOException{
+    /**
+     *
+     * @param directorioU
+     * @param directorioM
+     * @param directorioC
+     * @param idU
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void transferirMotos(String directorioU, String directorioM, String directorioC, String idU) throws FileNotFoundException, IOException{
             fileR = new FileReader(directorioU);
             lineafileR = new BufferedReader(fileR);
             ArrayList<String> aux = new ArrayList<String>();
@@ -716,7 +854,14 @@ public class Metodos {
             }
         }
         
-        public void eliminarEnSocios(String d, String id) throws FileNotFoundException, IOException{
+    /**
+     *
+     * @param d
+     * @param id
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public void eliminarEnSocios(String d, String id) throws FileNotFoundException, IOException{
             String linea;
             fileR = new FileReader(d);
             lineafileR = new BufferedReader(fileR);
@@ -751,5 +896,126 @@ public class Metodos {
             
             System.out.println("el usuario fue borrado con exito");
         }
+    
+    /**
+     *
+     * @param directorioC
+     * @throws IOException
+     */
+    public void miembroConMasCesionesRecibidas(String directorioC) throws IOException{
+            
+            int usuario, contador, codigoUsuarioMasAlto;
+            String mejorUsuario;
+            String motos = "";
+            mejorUsuario = "Ninguno";                               // para que si no encuentra a ninguno entre en una futura condicion y diga que no hay usuarios que hayan recibido cesiones            
+            ArrayList<String> cesionesDeUsuarios = new ArrayList<String>();   // aqui se alamcenara el numero de cesiones que recibe cada miembro, la posicion i determina el codigo del usuario, y el numero dentro de esa posicion determina el numero de veces que recibe cesion ese usuario
+            ArrayList<String> motosDeCadaUsuario = new ArrayList<String>();
+            int i = 0;
+            codigoUsuarioMasAlto = sacaElCodigoDeUsuarioMasAltoDeCesiones(directorioC);
+            while(i<=codigoUsuarioMasAlto){                                  // creamos tantos elementos de array inicializados a cero como lineas tenga el archivo
+                cesionesDeUsuarios.add("0");
+                motosDeCadaUsuario.add("0");
+                i++;
+            }
+            fileR = new FileReader(directorioC);
+            lineafileR = new BufferedReader(fileR);String linea2;
+            lineafileR.readLine();
+            while((linea2=lineafileR.readLine()) != null) {          // va linea a linea
+		token =new StringTokenizer(linea2);
+                token.nextToken();
+                token.nextToken();
+                token.nextToken();                
+                usuario = Integer.parseInt(token.nextToken());                      // metemos el codigo del usuario                                
+                contador = (Integer.parseInt(cesionesDeUsuarios.get(usuario)));   // aqui aumentamos el numero de veces que hemos encontrado ese usuario
+                contador++;
+                cesionesDeUsuarios.set(usuario, String.valueOf(contador));        // almacenamos en la posicion del usuario el numero de motos que hemos contado hasta ahora                
+                token.nextToken();               
+                token.nextToken();
+                if(motosDeCadaUsuario.get(usuario).equals("0")){                // si es la primera moto que almacenamos, para que no salga un 0 al lado del monbre
+                    motos = token.nextToken();                                  // alamcenamos en motos todas la motos que ha recibido ese usuario hasta ahora (hasta esta linea por asi decirlo)
+                    motosDeCadaUsuario.set(usuario, motos);                     // las almacenamos en un array en la posicion de su usuario    
+                                     
+                }
+                else{
+                    motos = motosDeCadaUsuario.get(usuario) + " " + token.nextToken();  // alamcenamos en motos todas la motos que ha recibido ese usuario hasta ahora (hasta esta linea por asi decirlo)
+                    motosDeCadaUsuario.set(usuario, motos);                             // las almacenamos en un array en la posicion de su usuario    
+                }
+                
+            }
+            int usuarioConMasMotos;                         // aqui iremos guardando el usuario con mas motos que encontremos
+            int numeroMotosMax = 0;                         // aqui almacenaremos el numero de motos del usuario con mas motos
+            i = 0;
+            while(i<=codigoUsuarioMasAlto){
+                if(Integer.parseInt(cesionesDeUsuarios.get(i)) > numeroMotosMax ){  // si encontramos un usuario con más motos
+                    usuarioConMasMotos = i;                                         // lo convertimos en el nuevo usuario con mas motos recibidas por cesion
+                    numeroMotosMax = Integer.parseInt(cesionesDeUsuarios.get(i));
+                }
+                i++;
+            }                       
+            
+            System.out.println("Los usuarios con mas motos son: ");
+            i = 0;
+            while(i<=codigoUsuarioMasAlto){
+                if(Integer.parseInt(cesionesDeUsuarios.get(i)) == numeroMotosMax ){
+                    System.out.print("Usuario ");
+                    System.out.print(i);
+                    System.out.print(" que tiene las motos ");
+                    System.out.println(motosDeCadaUsuario.get(i));                  
+                }
+                i++;
+            }
+            lineafileR.close();                                     // cerramos por si acaso                                
+            fileR.close();          
+            
+        }
+
+    /**
+     *
+     * @param directorioC
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public int sacaElCodigoDeUsuarioMasAltoDeCesiones(String directorioC) throws FileNotFoundException, IOException{ //este metodo encuentra el codigo mas alto de entre los usuario que hayan recibido cesiones
+            int usuario, usuarioMasAlto;
+            usuarioMasAlto = -100000;                               // aquí irá el codigo mas alto de todos los usuarios que han recibido alguna cesion
+            fileR = new FileReader(directorioC);
+            lineafileR = new BufferedReader(fileR);String linea2;
+            lineafileR.readLine();
+            while((linea2=lineafileR.readLine()) != null) {          // va linea a linea
+		token =new StringTokenizer(linea2);
+                token.nextToken();
+                token.nextToken();
+                token.nextToken();                
+                usuario = Integer.parseInt(token.nextToken());
+                if(usuario>usuarioMasAlto){                         // compara los usuarios
+                    usuarioMasAlto = usuario;                       // nos quedamos con el codigo mas alto
+                }
+            }
+            lineafileR.close();                                     // cerramos por si acaso                                
+            fileR.close();  
+            return usuarioMasAlto;                                  // una vez tenemos el mas alto, lo devolvemos
+            
+    }
+    /**
+     *
+     * @param usuarios
+     * @param usuario
+     * @return
+     */
+    public boolean compruebaSiLoHemosExplorado(ArrayList usuarios, String usuario){ // comptueba si el usuario esta en la lista de usuarios explorados
+            int i=0;            
+            while(i<usuarios.size()){
+                if(usuario.equals((String) usuarios.get(i))){            // si esta en la lista
+                    return true;                                  // devuleve true
+                }                                                  
+                else
+                    i++;
+            }
+            return false;                                         // si no esta en la lita devuelve false
+        }
+        
 }
+
+
 
